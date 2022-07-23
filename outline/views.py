@@ -6,3 +6,6 @@ from django.template import loader
 
 def index(request):
     return render(request, 'home.html')
+
+def new_event(request):
+    pass
