@@ -1,0 +1,43 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  box-shadow: 0px 3px 10px gray;
+}
+
+.nav-items {
+  list-style-type: none;
+  display: flex;
+}
+
+.nav-items > li {
+    padding: 10px;
+}
+
+.nav-items > li:hover {
+  background-color: gray;
+}
+
+.main {
+  width: 60%;
+  margin-left: 20%;
+}
+
+.dropdown_content {
+  display: none;
+  box-shadow: 0px 8px 16px 0px darkslategrey;
+}
+
+.dropdown:hover .dropdown_content{
+  display: block;
+}
+
+a {
+  text-decoration: none;
+
+}
+
+a:hover {
+  background-color: gray;
+}

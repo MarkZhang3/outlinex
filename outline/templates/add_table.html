@@ -21,10 +21,14 @@
     </nav>
 
     <div class="main">
-        <h2>Events</h2>
-        {% for i in all_events %}
-            <h4>{{ i.event_title }}</h4>
-        {% endfor %}
+        <h2>Add Table</h2>
+        <form action="add_table_to_record/" method="post">
+            {% csrf_token %}
+            <label>Event Title: </label>
+            <input class="input_line" name="table_name">
+            <!-- add checkboxes for table options to include -->
+            <input type="submit" value="Submit">
+        </form>
     </div>
 
 </body>

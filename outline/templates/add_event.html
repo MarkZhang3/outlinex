@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Outlinex</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <nav>
+        <h4><a href="/outline">Outline</a></h4>
+        <ul class="nav-items">
+            <li class="dropdown">Sort By</li> 
+            <div class="dropdown_content">
+                <p>add ul</p>
+            </div>
+            <li><a href="add_event/">Add Event</a></li>
+        </ul>
+    </nav>
+
+    <div class="main">
+        <h1>Add Event</h1>
+        <form action="add_event_to_record/" method="post">
+            {% csrf_token %}
+            <label for="table">Table: </label>
+            <input class="input_line" name="table">
+            <br><br>
+            <label>Event Title: </label>
+            <input class="input_line" name="title">
+            <br><br>
+            <label for="start_date">Start Date:</label>
+            <input class="input_box" name="start_date" placeholder="ie. {{ cur_date }}">
+            <br><br>
+            <label for="start_time">Start Time: </label>
+            <input class="input_box" name="start_month" placeholder="ie. 12:00">
+            <br><br>
+            <label for="end_date">End Date:</label>
+            <input class="input_box" name="end_date" placeholder="ie. {{ cur_date }}">
+            <br><br>
+            <label for="end_time">End Time:</label>
+            <input class="input_box" name="end_time" placeholder="ie. 12:00">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+</html>
