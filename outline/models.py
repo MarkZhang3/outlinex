@@ -14,7 +14,7 @@ class Table(models.Model):
 class Event(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
     text = models.TextField()
-    start_date = models.DateField(default=datetime.today().strftime('%Y-%m-%d'))
+    start_date = models.DateField()
     start_time = models.TimeField()
     end_date = models.DateField()
     end_time = models.TimeField()

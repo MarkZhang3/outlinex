@@ -15,18 +15,18 @@
             <div class="dropdown_content">
                 <p>add ul</p>
             </div>
-            <li><a href="add_event/">Add Event</a></li>
+            <li><a href="/outline/add_event/">Add Event</a></li>
             <li><a href="add_table/">Add Table</a></li>
         </ul>
     </nav>
 
     <div class="main">
-        <h2>Add Table</h2>
+        <h1>Add Table</h1>
         <form action="add_table_to_record/" method="post">
             {% csrf_token %}
-            <label>Event Title: </label>
+            <label for="table_name">Table Name: </label>
             <input class="input_line" name="table_name">
-            <!-- add checkboxes for table options to include -->
+            <br><br>
             <input type="submit" value="Submit">
         </form>
     </div>

@@ -15,16 +15,43 @@
             <div class="dropdown_content">
                 <p>add ul</p>
             </div>
-            <li><a href="add_event/">Add Event</a></li>
-            <li><a href="add_table/">Add Table</a></li>
+            <li><a href="/outline/add_event/">Add Event</a></li>
+            <li><a href="/outline/add_table/">Add Table</a></li>
         </ul>
     </nav>
 
     <div class="main">
-        <h2>Events</h2>
-        <p>{{ all_tables }}</p>
-        <!-- {% for i in all_events %}
-            <h4>{{ i.event_title }}</h4>
+        <h2>All Tables and Events</h2>
+        <p>{{ tables }}</p>
+        {% for table in tables %}
+            <table>
+                <tr>
+                    <h4>{{ table }}</th>
+                </tr>
+                {% for event in table.event_set.all %}
+                    <tr>
+                        <td>{{ event.text }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.completed }}</td>
+                        <td class="show_event_detail">details</td>
+                        <div class="event_detail">
+                            <p class="event_info">{{ event.text }}</p>
+                            <p class="event_info">Start date: {{ event.start_date }} at {{ event.start_time }}</p>
+                            <p class="event_info">End date and time: {{ event.end_date }} at {{ event.end_time }}</p>
+                            <p class="event_info">Completion: {{ event.completed }}</p>
+                        </div>
+                        <td><a href="/outline/delete_event/{{ event.id }}">delete</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br><br>
+        {% endfor %}
+
+        <!-- {% for t in k %} 
+            <p>{{t.id}}</p>
+            {% for e in t.event_set.all %} 
+                <p>e</p>
+            {% endfor %}
         {% endfor %} -->
     </div>
 
