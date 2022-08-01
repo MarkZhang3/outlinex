@@ -79,3 +79,9 @@ def update_event(request, id):
         event.start_time = time(t[0], t[1])
     event.save()
     return details(request, id)
+
+def update_completed(request, id):
+    event = Event.objects.get(id=id)
+    event.completed = True 
+    event.save()
+    return index(request)
