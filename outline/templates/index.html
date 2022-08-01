@@ -26,20 +26,20 @@
         {% for table in tables %}
             <table>
                 <tr>
-                    <h4>{{ table }}</th>
+                    <h4>{{ table }}</h4>
+                    <th>Event</th>
+                    <th>Start date</th>
+                    <th>End Date</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 {% for event in table.event_set.all %}
                     <tr>
                         <td>{{ event.text }}</td>
                         <td>{{ event.start_date }}</td>
-                        <td>{{ event.completed }}</td>
-                        <td class="show_event_detail">details</td>
-                        <div class="event_detail">
-                            <p class="event_info">{{ event.text }}</p>
-                            <p class="event_info">Start date: {{ event.start_date }} at {{ event.start_time }}</p>
-                            <p class="event_info">End date and time: {{ event.end_date }} at {{ event.end_time }}</p>
-                            <p class="event_info">Completion: {{ event.completed }}</p>
-                        </div>
+                        <td>{{ event.end_date }}</td>
+                        <td><a href="/outline/details/{{ event.id }}">details</a></td>
+                        <td><a href="/outline/update_completed/{{ event.id }}">done</a></td>
                         <td><a href="/outline/delete_event/{{ event.id }}">delete</td>
                     </tr>
                 {% endfor %}
@@ -47,12 +47,6 @@
             <br><br>
         {% endfor %}
 
-        <!-- {% for t in k %} 
-            <p>{{t.id}}</p>
-            {% for e in t.event_set.all %} 
-                <p>e</p>
-            {% endfor %}
-        {% endfor %} -->
     </div>
 
 </body>

@@ -21,27 +21,27 @@
     </nav>
 
     <div class="main">
-        <h1>Add Event</h1>
-        <form action="add_event_to_record/" method="post">
+        <h1>Event Details</h1>
+        <form action="/outline/update_event/{{ event.id }}" method="post">
             {% csrf_token %}
-            <label for="table">Table: </label>
-            <input class="input_line" name="table">
+            <label for="table">Table: {{ event.table }}</label>
             <br><br>
             <label>Event Text: </label>
-            <input class="input_line" name="event_text">
+            <input class="edit_line" name="event_text" placeholder="{{ event.text }}">
             <br><br>
             <label for="start_date">Start Date:</label>
-            <input class="input_box" name="start_date" placeholder="ie. {{ cur_date }}">
+            <input class="edit_line" name="start_date" placeholder="{{ event.start_date }}">
             <br><br>
             <label for="start_time">Start Time: </label>
-            <input class="input_box" name="start_time" placeholder="ie. 12:00">
+            <input class="edit_line" name="start_time" placeholder="{{ event.start_time }}">
             <br><br>
             <label for="end_date">End Date:</label>
-            <input class="input_box" name="end_date" placeholder="ie. {{ cur_date }}">
+            <input class="edit_line" name="end_date" placeholder="{{ event.end_date }}">
             <br><br>
             <label for="end_time">End Time:</label>
-            <input class="input_box" name="end_time" placeholder="ie. 12:00">
+            <input class="edit_line" name="end_time" placeholder="{{ event.end_time }}">
             <br><br>
+            <a href="/outline/update_complete/{{ event.id }}">mark as done</a>
             <input type="submit" value="Submit">
         </form>
     </div>

@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from django.db import connection
+from django.http import HttpResponse
 from datetime import datetime, date, time
 from .models import Table
 from .models import Event 
@@ -39,18 +37,7 @@ def add_event_to_record(request):
             end_time = time(et[0], et[1]),
             completed = False
         )
-
-
-def sort_by_start_date(request):
-    if request.method == 'POST':
-     # select * from <table>.event_set.all() order by start_date, start_time
-        table_name = request.POST.get('table')
-        table = Table.objects.get(name=table_name)
-        events = table.event_set.all().order_by('start_date', 'start_time')
-        return render(request, 'index.html')
-
-def filter_title(request):
-    filter = request.POST('filter_title')
+        return index(request)
 
 def add_table(request):
     return render(request, 'add_table.html')
@@ -62,9 +49,33 @@ def add_table_to_record(request):
         t.save()
         return index(request)
 
-def delete_event(request, event_id):
-    event = Event.objects.get(id=event_id)
-    table = event.table
-    table.event_set.remove(event)
+def delete_event(request, id):
+    event = Event.objects.get(id=id)
     event.delete()
-    return HttpResponseRedirect('index.html')
+    return index(request)
+
+def details(request, id):
+    event = Event.objects.get(id=id)
+    content = {}
+    content['event'] = event 
+    return render(request, 'details.html', content)
+
+def update_event(request, id):
+    event = Event.objects.get(id=id)
+    changeList = request.POST
+    if changeList['event_text'] != '':
+        event.text = changeList['event_text']
+    if changeList['start_date'] != '':
+        d = list(map(int, changeList['start_date'].split('-')))
+        event.start_date = date(d[0], d[1], d[2])
+    if changeList['start_time'] != '':
+        t = list(map(int, changeList['start_time'].split(':')))
+        event.start_time = time(t[0], t[1])
+    if changeList['end_date'] != '':
+        d = list(map(int, changeList['end_date'].split('-')))
+        event.start_date = date(d[0], d[1], d[2])
+    if changeList['end_time'] != '':
+        t = list(map(int, changeList['end_time'].split(':')))
+        event.start_time = time(t[0], t[1])
+    event.save()
+    return details(request, id)
