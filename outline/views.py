@@ -85,3 +85,8 @@ def update_completed(request, id):
     event.completed = True 
     event.save()
     return index(request)
+
+def delete_table(request, id):
+    table = Table.objects.get(id=id)
+    table.delete()
+    return index(request)

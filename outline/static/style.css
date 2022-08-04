@@ -53,9 +53,14 @@ table {
 }
 
 td {
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 th {
   padding:10px;
+}
+
+.table_header {
+  display: flex;
+  justify-content: space-between;
 }

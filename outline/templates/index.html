@@ -9,7 +9,7 @@
 <body>
 
     <nav>
-        <h4><a href="/outline">Outline</a></h4>
+        <h3><a href="/outline">Outline</a></h3>
         <ul class="nav-items">
             <li class="dropdown">Sort By</li> 
             <div class="dropdown_content">
@@ -26,7 +26,7 @@
         {% for table in tables %}
             <table>
                 <tr>
-                    <h4>{{ table }}</h4>
+                    <h4>{{ table }} <a class="delete_table" href="/outline/delete_table/{{ table.id }}">delete table</a></h4>
                     <th>Event</th>
                     <th>Start date</th>
                     <th>End Date</th>
@@ -39,7 +39,7 @@
                         <td>{{ event.start_date }}</td>
                         <td>{{ event.end_date }}</td>
                         <td><a href="/outline/details/{{ event.id }}">details</a></td>
-                        <td><a href="/outline/update_completed/{{ event.id }}">done</a></td>
+                        <td><a href="/outline/update_completed/{{ event.id }}">mark as done</a></td>
                         <td><a href="/outline/delete_event/{{ event.id }}">delete</td>
                     </tr>
                 {% endfor %}
