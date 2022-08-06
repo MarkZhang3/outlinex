@@ -1,53 +1,32 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Outlinex</title>
+{% extends "base.html" %}
+{% block content %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-</head>
-<body>
-
-    <nav>
-        <h3><a href="/outline">Outline</a></h3>
-        <ul class="nav-items">
-            <li class="dropdown">Sort By</li> 
-            <div class="dropdown_content">
-                <p>add ul</p>
-            </div>
-            <li><a href="/outline/add_event/">Add Event</a></li>
-            <li><a href="/outline/add_table/">Add Table</a></li>
-        </ul>
-    </nav>
-
-    <div class="main">
-        <h2>All Tables and Events</h2>
-        <p>{{ tables }}</p>
-        {% for table in tables %}
-            <table>
+<div class="main">
+    <h2>All Tables and Events</h2>
+    {% for table in tables %}
+        <table>
+            <tr>
+                <h4>{{ table }} <a class="delete_table" href="/outline/delete_table/{{ table.id }}">delete table</a></h4>
+                <th>Event</th>
+                <th>Start date</th>
+                <th>End Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for event in table.event_set.all %}
                 <tr>
-                    <h4>{{ table }} <a class="delete_table" href="/outline/delete_table/{{ table.id }}">delete table</a></h4>
-                    <th>Event</th>
-                    <th>Start date</th>
-                    <th>End Date</th>
-                    <th></th>
-                    <th></th>
+                    <td>{{ event.text }}</td>
+                    <td>{{ event.start_date }}</td>
+                    <td>{{ event.end_date }}</td>
+                    <td><a href="/outline/details/{{ event.id }}">details</a></td>
+                    <td><a href="/outline/update_completed/{{ event.id }}">mark as done</a></td>
+                    <td><a href="/outline/delete_event/{{ event.id }}">delete</td>
                 </tr>
-                {% for event in table.event_set.all %}
-                    <tr>
-                        <td>{{ event.text }}</td>
-                        <td>{{ event.start_date }}</td>
-                        <td>{{ event.end_date }}</td>
-                        <td><a href="/outline/details/{{ event.id }}">details</a></td>
-                        <td><a href="/outline/update_completed/{{ event.id }}">mark as done</a></td>
-                        <td><a href="/outline/delete_event/{{ event.id }}">delete</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            <br><br>
-        {% endfor %}
+            {% endfor %}
+        </table>
+        <br><br>
+    {% endfor %}
 
-    </div>
+</div>
 
-</body>
-</html>
+{% endblock content %}

@@ -1,24 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Outlinex</title>
-
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-</head>
-<body>
-
-    <nav>
-        <h3><a href="/outline">Outline</a></h3>
-        <ul class="nav-items">
-            <li class="dropdown">Sort By</li> 
-            <div class="dropdown_content">
-                <p>add ul</p>
-            </div>
-            <li><a href="/outline/add_event/">Add Event</a></li>
-            <li><a href="/outline/add_table/">Add Table</a></li>
-        </ul>
-    </nav>
+{% extends "base.html" %}
+{% block content %}
 
     <div class="main">
         <h1>Add Event</h1>
@@ -45,6 +26,5 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-
-</body>
-</html>
+    
+{% endblock content %}
