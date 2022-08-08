@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from outline import views as outline_views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('outline/', include('outline.urls')), #adding outline URL conf
     path('admin/', admin.site.urls),
+    path('outline/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('outline/sign_up/', outline_views.sign_up, name='sign_up'),
 ]

@@ -1,15 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import datetime, date, time
 from .models import Table
 from .models import Event 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 import calendar 
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required(login_url='/login')
 def index(request):
+    user = request.user.username
+    userTables = [t for t in Table.objects.all() if t.user == user]
     content = {
-        'tables': Table.objects.all()
+        'tables': userTables 
     }
     return render(request, 'index.html', content)
 
@@ -45,7 +50,7 @@ def add_table(request):
 def add_table_to_record(request):
     if request.method == 'POST':
         table_name = str(request.POST.get('table_name'))
-        t = Table(name=table_name)
+        t = Table(name=table_name, user = request.user)
         t.save()
         return index(request)
 
@@ -91,3 +96,16 @@ def delete_table(request, id):
     table.delete()
     return index(request)
 
+def sign_up(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Account Created")
+            return index(request)
+    else:
+        form = UserCreationForm()
+    content = {
+        'form': form,
+    }
+    return render(request, 'sign_up.html', content)

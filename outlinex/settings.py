@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'outlinex.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd36e7m4jjrutes',
+        'USER': 'jbdilkojsdsqoz',
+        'PASSWORD': 'a6cffd1d1e5473f875acfbbb2d942cbec7b2b13eac74354f15d2589b5ad35df1',
+        'HOST': 'ec2-44-205-112-253.compute-1.amazonaws.com',
+        'PORT': '5432' 
     }
 }
 
@@ -126,5 +130,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'index'
 
 

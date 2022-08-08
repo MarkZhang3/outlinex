@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 
 class Table(models.Model):
     name = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.TextField() # using ForgienKey raises errors because there is no column for user_id
+    #   value will be assigned in views.py upon creation since each user has a unique username
 
     def __str__(self):
         return self.name 
@@ -25,10 +26,10 @@ class Event(models.Model):
     def __str__(self):
         return self.text
 
-
-
-
-
+class User(User):
+    
+    def __str__(self):
+        return User.username
 
     
 

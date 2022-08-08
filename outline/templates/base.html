@@ -11,10 +11,17 @@
     <nav>
         <h3><a href="/outline">Outline</a></h3>
         <ul class="nav-items">
+            <li><a href="/outline/login/">Logout</a></li>
             <li><a href="/outline/add_event/">Add Event</a></li>
             <li><a href="/outline/add_table/">Add Table</a></li>
         </ul>
     </nav>
+
+    {% if messages %} 
+        {% for message in message %} 
+            {{ message }}
+        {% endfor %}
+    {% endif %}
 
     {% block content %}
     {% endblock %}
