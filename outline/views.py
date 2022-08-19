@@ -3,15 +3,16 @@ from django.http import HttpResponse
 from datetime import datetime, date, time
 from .models import Table
 from .models import Event 
-from django.contrib.auth.forms import UserCreationForm
+from .forms import UserCreationForm
 from django.contrib import messages
-import calendar 
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required(login_url='/login')
+@login_required(login_url='/outline/login')
 def index(request):
     user = request.user.username
+    print(user)
     userTables = [t for t in Table.objects.all() if t.user == user]
     content = {
         'tables': userTables 
@@ -101,7 +102,7 @@ def sign_up(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Account Created")
+            login(request)
             return index(request)
     else:
         form = UserCreationForm()
@@ -109,3 +110,7 @@ def sign_up(request):
         'form': form,
     }
     return render(request, 'sign_up.html', content)
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
