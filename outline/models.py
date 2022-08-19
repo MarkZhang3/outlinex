@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 from django.db import models
 from django.db import connection 
 from datetime import datetime
@@ -27,7 +28,8 @@ class Event(models.Model):
         return self.text
 
 class User(User):
-    
+    email_password = models.TextField(null=True, default="")
+
     def __str__(self):
         return User.username
 

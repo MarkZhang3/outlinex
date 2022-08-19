@@ -1,4 +1,4 @@
-from .models import User, Table, Event 
+from outline.models import User, Table, Event 
 import smtplib, os, ssl 
 
 # must have two factor auth enabled 
@@ -7,17 +7,15 @@ import smtplib, os, ssl
 
 PORT = 465
 SMTP_SERVER = 'smtp.gmail.com'
-FILE = 'email_credentials.txt'
-FILE_DIR = '/User/Desktop/outlinex'
 
 class Email: 
 
-    def __init__(self, message):
+    def __init__(self, message, user):
         self.message = message 
+        self.user = user
         try: 
-            file = open(os.path.join(FILE_DIR, FILE))
-            self.user = file.readline() 
-            self.pw = file.readline()
+            self.username = user.email
+            self.password = user.email_password
 
         except:
             print(Exception)
@@ -26,8 +24,8 @@ class Email:
         try:
             context = ssl.create_default_context()
             server = smtplib.SMTP_SSL(SMTP_SERVER, PORT, context=context)
-            server.login(self.__user, self.__password)
-            server.sendmail(self.__user, self.__user, self.message)
+            server.login(self.user, self.pw)
+            server.sendmail(self.user, self.user, self.message)
             
         except smtplib.SMTPResponseException as exception:
             print(str(exception))

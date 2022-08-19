@@ -102,14 +102,20 @@ def sign_up(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            login(request)
-            return index(request)
+            return render(request, 'app_password.html', {'username': form.cleaned_data.get('username')})
     else:
         form = UserCreationForm()
     content = {
         'form': form,
     }
     return render(request, 'sign_up.html', content)
+
+def app_password(request):
+    user = request.user 
+    pw = request.POST['email_password']
+    user.email_password = pw 
+    user.save() 
+    return redirect('index')
 
 def logout_view(request):
     logout(request)

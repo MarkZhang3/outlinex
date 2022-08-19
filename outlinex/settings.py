@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'outline.apps.OutlineConfig'
+    'outline.apps.OutlineConfig',
+    'Email.apps.EmailConfig',
 ]
 
 MIDDLEWARE = [
