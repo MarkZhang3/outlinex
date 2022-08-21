@@ -2,7 +2,18 @@
 {% block content %}
 
 <div class="main">
+
+    {% if request.user.apppassword == '' %} 
+
+        <div class="round-box">
+            <h4>Hi {{ request.user.username }}</h4>
+            <p>You can get email reminders for events <a href="{% url 'app_password' %}">here</a></p>
+        </div>
+
+    {% endif %}
+
     <h2>All Tables and Events</h2>
+    
     {% for table in tables %}
         <table>
             <tr>
@@ -19,7 +30,9 @@
                     <td>{{ event.start_date }}</td>
                     <td>{{ event.end_date }}</td>
                     <td><a href="/outline/details/{{ event.id }}">details</a></td>
-                    <td><a href="/outline/update_completed/{{ event.id }}">mark as done</a></td>
+                    {% if event.completed == False %}
+                        <td><a href="/outline/update_completed/{{ event.id }}">mark as done</a></td>
+                    {% endif %}
                     <td><a href="/outline/delete_event/{{ event.id }}">delete</td>
                 </tr>
             {% endfor %}

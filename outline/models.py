@@ -29,4 +29,4 @@ class Event(models.Model):
 
 class AppPassword(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    app_password = models.TextField()
+    app_password = models.TextField(null=True, blank=True)

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from datetime import datetime, date, time
 from .models import Table, Event, AppPassword 
-from .forms import UserCreationForm
-from django.contrib.auth import login, logout
+from .forms import RegisterForm, PasswordForm
+from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/outline/login')
 def index(request):
     user = request.user.username
-    print(request.user.apppassword)
     userTables = [t for t in Table.objects.all() if t.user == user]
     content = {
         'tables': userTables,
@@ -97,22 +96,25 @@ def delete_table(request, id):
 
 def sign_up(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'app_password.html', {'username': form.cleaned_data.get('username')})
+            return index(request)
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     content = {
         'form': form,
     }
     return render(request, 'sign_up.html', content)
 
 def app_password(request):
-    user = request.user.username
-    pw = request.POST['app_password']
-    password = AppPassword(user=User.objects.get(username=user), app_password=pw) 
-    password.save() 
+    return render(request, 'app_password.html')
+
+def add_app_password(request):
+    user = request.user 
+    password = request.POST['app_password']
+    pw = AppPassword.objects.create(user=user, app_password=password)
+    pw.save()
     return redirect('index')
 
 def logout_view(request):

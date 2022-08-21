@@ -13,4 +13,5 @@ urlpatterns = [
     path('update_completed/<int:id>', views.update_completed, name='update_completed'),
     path('delete_table/<int:id>', views.delete_table, name='delete_table'),
     path('app_password/', views.app_password, name='app_password'),
+    path('add_app_password/', views.add_app_password, name='add_app_password'),
 ]
