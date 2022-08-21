@@ -1,21 +1,19 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from datetime import datetime, date, time
-from .models import Table
-from .models import Event 
+from .models import Table, Event, AppPassword 
 from .forms import UserCreationForm
-from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required(login_url='/outline/login')
 def index(request):
     user = request.user.username
-    print(user)
+    print(request.user.apppassword)
     userTables = [t for t in Table.objects.all() if t.user == user]
     content = {
-        'tables': userTables 
+        'tables': userTables,
     }
     return render(request, 'index.html', content)
 
@@ -111,10 +109,10 @@ def sign_up(request):
     return render(request, 'sign_up.html', content)
 
 def app_password(request):
-    user = request.user 
-    pw = request.POST['email_password']
-    user.email_password = pw 
-    user.save() 
+    user = request.user.username
+    pw = request.POST['app_password']
+    password = AppPassword(user=User.objects.get(username=user), app_password=pw) 
+    password.save() 
     return redirect('index')
 
 def logout_view(request):

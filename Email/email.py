@@ -10,12 +10,12 @@ SMTP_SERVER = 'smtp.gmail.com'
 
 class Email: 
 
-    def __init__(self, message, user):
+    def __init__(self, message, pw):
         self.message = message 
-        self.user = user
+        self.user = pw.user
         try: 
-            self.username = user.email
-            self.password = user.email_password
+            self.username = self.user.username
+            self.password = pw.app_password
 
         except:
             print(Exception)

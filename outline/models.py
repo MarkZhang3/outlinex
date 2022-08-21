@@ -27,11 +27,6 @@ class Event(models.Model):
     def __str__(self):
         return self.text
 
-class User(User):
-    email_password = models.TextField(null=True, default="")
-
-    def __str__(self):
-        return User.username
-
-    
-
+class AppPassword(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    app_password = models.TextField()
