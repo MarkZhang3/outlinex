@@ -1,7 +1,7 @@
 from datetime import datetime
 from outline.models import User, Table, Event 
 from apscheduler.schedulers.background import BackgroundScheduler # apscheduler package
-import email
+from . import email
 
 #vqoaywnbfhcjgshb
 

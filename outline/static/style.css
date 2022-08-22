@@ -60,15 +60,13 @@ th {
   padding:10px;
 }
 
-.table_header {
-  display: flex;
-  justify-content: space-between;
+.no_margin {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-.round-box {
+.round_box {
   border-radius: 25px;
   background: #28ad21;
   padding: 20px;
-  width: 200px;
-  height: 150px;
 }

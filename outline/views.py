@@ -85,7 +85,10 @@ def update_event(request, id):
 
 def update_completed(request, id):
     event = Event.objects.get(id=id)
-    event.completed = True 
+    if event.completed:
+        event.completed = False 
+    else:
+        event.completed = True
     event.save()
     return index(request)
 
@@ -120,3 +123,8 @@ def add_app_password(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+def all_events(request, id):
+    table = Table.objects.get(id=id)
+    content = {'events': table.event_set.all()}
+    return render(request, 'all_events.html', content)

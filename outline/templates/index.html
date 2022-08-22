@@ -5,9 +5,9 @@
 
     {% if request.user.apppassword == '' %} 
 
-        <div class="round-box">
+        <div class="round_box">
             <h4>Hi {{ request.user.username }}</h4>
-            <p>You can get email reminders for events <a href="{% url 'app_password' %}">here</a></p>
+            <p>You can get email reminders for events by adding your email app password <a href="{% url 'app_password' %}">here</a></p>
         </div>
 
     {% endif %}
@@ -17,7 +17,14 @@
     {% for table in tables %}
         <table>
             <tr>
-                <h4>{{ table }} <a class="delete_table" href="/outline/delete_table/{{ table.id }}">delete table</a></h4>
+                <th><h4 class="no-margin">{{ table }}</h4></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><a href="/outline/all_events/{{ table.id }}">all events</a></th>
+                <th><a href="/outline/delete_table/{{ table.id }}">delete table</a></th>
+            </tr>
+            <tr>
                 <th>Event</th>
                 <th>Start date</th>
                 <th>End Date</th>
@@ -25,17 +32,18 @@
                 <th></th>
             </tr>
             {% for event in table.event_set.all %}
-                <tr>
-                    <td>{{ event.text }}</td>
-                    <td>{{ event.start_date }}</td>
-                    <td>{{ event.end_date }}</td>
-                    <td><a href="/outline/details/{{ event.id }}">details</a></td>
-                    {% if event.completed == False %}
-                        <td><a href="/outline/update_completed/{{ event.id }}">mark as done</a></td>
-                    {% endif %}
-                    <td><a href="/outline/delete_event/{{ event.id }}">delete</td>
-                </tr>
+                {% if event.completed == False %}
+                    <tr>
+                        <td>{{ event.text }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.end_date }}</td>
+                        <td><a href="/outline/details/{{ event.id }}">details</a></td>
+                        <td><a href="/outline/update_completed/{{ event.id }}">completed</a></td>
+                        <td><a href="/outline/delete_event/{{ event.id }}">delete</td>
+                    </tr>
+                {% endif %}
             {% endfor %}
+
         </table>
         <br><br>
     {% endfor %}

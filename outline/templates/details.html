@@ -22,7 +22,12 @@
             <label for="end_time">End Time:</label>
             <input class="edit_line" name="end_time" placeholder="{{ event.end_time }}">
             <br><br>
-            <a href="/outline/update_completed/{{ event.id }}">mark as done</a>
+            {% if event.completed %}
+                <a href="/outline/update_completed/{{ event.id }}">mark as not completed</a>
+            {% else %} 
+                <a href="/outline/update_completed/{{ event.id }}">mark as completed</a>
+            {% endif %} 
+            <br><br>
             <input type="submit" value="Update">
         </form>
     </div>
