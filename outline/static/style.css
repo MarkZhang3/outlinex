@@ -46,19 +46,34 @@ a:hover {
 table {
   box-shadow: 0px 0px 5px gray;
   padding: 15px;
+  width: 90%;
 }
 
 .event_info {
   padding: 5px;
 }
 
-td {
-  padding-right: 30px;
+td.event_peripherial {
+  padding: 10px;
+  width: 10%;
+  text-align: center;
 }
 
-th {
-  padding:10px;
+td.event_main {
+  padding: 10px;
+  width: 23%;
+  text-align: center;
 }
+
+th.event_main {
+  padding: 10px;
+  width: 23%;
+}
+
+th.event_peripherial {
+  padding: 10px;
+  width: 10%;
+} 
 
 .no_margin {
   margin-top: 0;
@@ -66,7 +81,8 @@ th {
 }
 
 .round_box {
-  border-radius: 25px;
-  background: #28ad21;
-  padding: 20px;
+  border-radius: 15px;
+  background: #62cd5c;
+  padding: 10px;
 }
+
