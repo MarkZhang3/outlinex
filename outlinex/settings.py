@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'outlinex.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd36e7m4jjrutes',
-        'USER': 'jbdilkojsdsqoz',
-        'PASSWORD': 'a6cffd1d1e5473f875acfbbb2d942cbec7b2b13eac74354f15d2589b5ad35df1',
-        'HOST': 'ec2-44-205-112-253.compute-1.amazonaws.com',
+        'NAME': 'd6og45bo5br9af',
+        'USER': 'velzlwlrvcngmt',
+        'PASSWORD': '42945b43838b542bcf5d93253151aedde75773714e53caa935574e8b0ad5ca21',
+        'HOST': 'ec2-44-196-174-238.compute-1.amazonaws.com',
         'PORT': '5432' 
     }
 }

@@ -8,46 +8,65 @@
 
         <div class="round_box">
             <h4>Hi {{ request.user.username }}</h4>
-            <p>You can get email reminders for events by adding your email app password <a href="{% url 'app_password' %}">here</a></p>
+            <p>You can get email reminders for events by adding an app password <a href="{% url 'app_password' %}">here</a></p>
         </div>
 
     {% endif %}
 
     <h2>All Tables and Events</h2>
-    
+    <script>
+        function popup(id) {
+            let x = "table_detail_"+String(id)
+            var popup = document.getElementById(x)
+            popup.classList.toggle("show")
+        }
+    </script>
     {% for table in tables %}
-        <table>
-            <tr>
-                <th><h4 class="no-margin">{{ table }}</h4></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th class="event_peripherial"><a class="link1" href="/outline/all_events/{{ table.id }}">all events</a></th>
-                <th class="event_peripherial"><a class="link1" href="/outline/delete_table/{{ table.id }}">delete table</a></th>
-            </tr>
-            <tr>
-                <th class="event_main">Event</th>
-                <th class="event_main">Start date</th>
-                <th class="event_main">End Date</th>
-                <th class="event_peripherial"></th>
-                <th class="event_peripherial"></th>
-                <th class="event_peripherial"></th>
-            </tr>
-            {% for event in table.event_set.all %}
-                {% if event.completed == False %}
-                    <tr>
-                        <td class="event_main">{{ event.text }}</td>
-                        <td class="event_main">{{ event.start_date }}</td>
-                        <td class="event_main">{{ event.end_date }}</td>
-                        <td class="event_peripherial"><a class="link2" href="/outline/details/{{ event.id }}">details</a></td>
-                        <td class="event_peripherial"><a class="link2" href="/outline/update_completed/{{ event.id }}">completed</a></td>
-                        <td class="event_peripherial"><a class="link2" href="/outline/delete_event/{{ event.id }}">delete</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-
-        </table>
-        <br><br>
+        <div>
+            <div class="table_title"> 
+                <h3>{{ table }}</h3>
+                <div class="menu-icon" onclick="popup('{{ table.id }}')" id="menu_{{table.id}}">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <div class="table_detail" id="table_detail_{{ table.id }}">
+                        <p><a class="link1" href="/outline/all_events/{{ table.id }}">all events</a></p>
+                        <p><a class="link1" href="/outline/delete_table/{{ table.id }}">delete table</a></p>
+                    </div>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th class="event_main">Event</th>
+                    <th class="event_main">Start date</th>
+                    <th class="event_main">End Date</th>
+                    <th class="event_peripherial"></th>
+                    <th class="event_peripherial"></th>
+                    <th class="event_peripherial">
+                        <div class="menu-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </th>
+                </tr>
+                {% for event in table.event_set.all %}
+                    {% if event.completed == False %}
+                        <tr>
+                            <td class="event_main">{{ event.text }}</td>
+                            <td class="event_main">{{ event.start_date }}</td>
+                            <td class="event_main">{{ event.end_date }}</td>
+                            <td class="event_peripherial"><a class="link2" href="/outline/details/{{ event.id }}">details</a></td>
+                            <td class="event_peripherial"><a class="link2" href="/outline/update_completed/{{ event.id }}">completed</a></td>
+                            <td class="event_peripherial"><a class="link2" href="/outline/delete_event/{{ event.id }}">delete</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+    
+            </table>
+        </div>
+        
+        <br>
     {% endfor %}
 
 </div>

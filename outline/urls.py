@@ -15,4 +15,5 @@ urlpatterns = [
     path('app_password/', views.app_password, name='app_password'),
     path('add_app_password/', views.add_app_password, name='add_app_password'),
     path('all_events/<int:id>', views.all_events, name='all_events'),
+    path('demo/', views.demo, name='demo'),
 ]

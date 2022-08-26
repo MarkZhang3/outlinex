@@ -128,3 +128,8 @@ def all_events(request, id):
     table = Table.objects.get(id=id)
     content = {'events': table.event_set.all()}
     return render(request, 'all_events.html', content)
+
+def demo(request):
+    user = User.objects.get(username="testUser1")
+    login(request, user)
+    return index(request)
