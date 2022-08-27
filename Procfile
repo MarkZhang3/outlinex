@@ -1,0 +1,1 @@
+web: gunicorn outlinex.wsgi
