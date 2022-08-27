@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-_5f5@1f2--z%w)vl2-d@l=j3t%_dbu)+w-@ia(g9wpx)ry@@er
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'https://outlinexdjango.herokuapp.com/',
+    'outlinexdjango.herokuapp.com',
 ]
 
 
