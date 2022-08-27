@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-_5f5@1f2--z%w)vl2-d@l=j3t%_dbu)+w-@ia(g9wpx)ry@@er
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://outlinexdjango.herokuapp.com/',
+]
 
 
 # Application definition
