@@ -50,12 +50,12 @@ def add_table_to_record(request):
         table_name = str(request.POST.get('table_name'))
         t = Table(name=table_name, user = request.user)
         t.save()
-        return index(request)
+        return redirect('/outline/')
 
 def delete_event(request, id):
     event = Event.objects.get(id=id)
     event.delete()
-    return index(request)
+    return redirect('/outline/')
 
 def details(request, id):
     event = Event.objects.get(id=id)
@@ -90,12 +90,12 @@ def update_completed(request, id):
     else:
         event.completed = True
     event.save()
-    return index(request)
+    return redirect('/outline/')
 
 def delete_table(request, id):
     table = Table.objects.get(id=id)
     table.delete()
-    return index(request)
+    return redirect('/outline/')
 
 def sign_up(request):
     if request.method == 'POST':

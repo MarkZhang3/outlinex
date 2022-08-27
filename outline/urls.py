@@ -17,3 +17,11 @@ urlpatterns = [
     path('all_events/<int:id>', views.all_events, name='all_events'),
     path('demo/', views.demo, name='demo'),
 ]
+
+try: 
+    from . import scheduler
+    scheduler.start()
+except Exception as e:
+    print(str(e))
+
+
