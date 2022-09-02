@@ -20,6 +20,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('outline/', include('outline.urls')), #adding outline URL conf
+    path('', include('outline.urls')),
     path('admin/', admin.site.urls),
     path('outline/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('outline/logout/', outline_views.logout_view, name='logout'),
